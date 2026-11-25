@@ -72,7 +72,7 @@ export default function PartnersPage() {
           more: [{ label: "Applications", href: "/applications" }],
         }}
         columns={columns}
-        searchPlaceholder="Search name, code, contact, mobile or city"
+        searchPlaceholder="Search partners, codes, cities…"
         presets={[
           { key: "all", label: "All", params: {}, countKey: "all" },
           { key: "active", label: "Active", params: { status: "active" }, countKey: "active" },

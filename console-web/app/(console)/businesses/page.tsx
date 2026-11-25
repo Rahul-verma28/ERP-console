@@ -101,7 +101,7 @@ export default function BusinessesPage() {
           primary: <HeaderLink href="/businesses/new" primary><Plus /> {partner ? "Add client" : "Add business"}</HeaderLink>,
         }}
         columns={columns}
-        searchPlaceholder="Search name, owner, email, mobile or GSTIN"
+        searchPlaceholder="Search businesses, owners, GSTIN…"
         presets={[
           { key: "all", label: "All", params: {}, countKey: "all" },
           { key: "trialing", label: "Trial", params: { status: "trialing" }, countKey: "trialing" },

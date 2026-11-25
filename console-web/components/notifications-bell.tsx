@@ -84,7 +84,7 @@ export function NotificationsBell() {
 
   return (
     <>
-      <button type="button" onClick={() => change(true)} className="relative grid size-9 place-items-center rounded-lg hover:bg-muted" aria-label={unseen ? `${unseen} new notifications` : "Notifications"}>
+      <button type="button" onClick={() => change(true)} className="relative grid size-9 place-items-center rounded-lg hover:bg-muted" aria-label={unseen ? `${unseen} new notification${unseen === 1 ? "" : "s"}` : "Notifications"}>
         <Bell className="size-[18px]" />
         {unseen > 0 && <span className="absolute top-1 right-1 grid min-w-4 place-items-center rounded-full bg-destructive px-1 text-[10px] leading-4 font-semibold text-white tabular-nums">{unseen}</span>}
       </button>

@@ -62,12 +62,22 @@ export default function InvoicePage() {
         </section>
         <table className="mt-4 w-full">
           <thead className="border-b text-left text-xs text-zinc-500">
-            <tr><th className="py-2">Description</th><th>SAC</th><th className="text-right">Qty</th><th className="text-right">Rate</th><th className="text-right">Amount</th></tr>
+            <tr>
+              <th className="py-2.5 pr-4">Description</th>
+              <th className="px-3 py-2.5">SAC</th>
+              <th className="px-3 py-2.5 text-right">Qty</th>
+              <th className="px-3 py-2.5 text-right">Rate</th>
+              <th className="py-2.5 pl-4 text-right">Amount</th>
+            </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-zinc-100">
             {i.lines.map((l, n) => (
-              <tr key={n} className="border-b border-zinc-100">
-                <td className="py-2">{l.description}</td><td>{l.sac}</td><td className="text-right tabular-nums">{l.quantity}</td><td className="text-right tabular-nums">{formatPaise(l.unitPaise)}</td><td className="text-right tabular-nums">{formatPaise(l.amountPaise)}</td>
+              <tr key={n}>
+                <td className="py-3 pr-4 font-medium">{l.description}</td>
+                <td className="px-3 py-3 font-mono text-xs text-zinc-500">{l.sac}</td>
+                <td className="px-3 py-3 text-right tabular-nums">{l.quantity}</td>
+                <td className="px-3 py-3 text-right tabular-nums">{formatPaise(l.unitPaise)}</td>
+                <td className="py-3 pl-4 text-right font-semibold tabular-nums">{formatPaise(l.amountPaise)}</td>
               </tr>
             ))}
           </tbody>

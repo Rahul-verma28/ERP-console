@@ -124,7 +124,7 @@ export interface TabDef<K extends string> { key: K; label: string; count?: numbe
 
 export function Tabs<K extends string>({ tabs, value, onChange }: { tabs: TabDef<K>[]; value: K; onChange: (k: K) => void }) {
   return (
-    <div className="flex flex-wrap gap-1 overflow-x-auto border-b" role="tablist">
+    <div className="flex flex-wrap gap-1 overflow-x-auto overflow-y-hidden border-b [scrollbar-width:none]" role="tablist">
       {tabs.filter((t) => !t.hidden).map((t) => (
         <button key={t.key} role="tab" aria-selected={value === t.key} onClick={() => onChange(t.key)} className={cn("-mb-px flex items-center gap-1.5 border-b-2 px-4 py-2.5 text-sm font-medium whitespace-nowrap", value === t.key ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground")}>
           {t.label}{t.count ? <span className="rounded-full bg-muted px-1.5 text-xs tabular-nums">{t.count}</span> : null}

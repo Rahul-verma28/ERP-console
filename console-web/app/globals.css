@@ -268,3 +268,19 @@ html[data-density="compact"] {
 [data-valid="true"] {
     border-color: #1F7A4D;
 }
+
+/* Fix VIS-01: Tablist scrollbar artifact */
+[role="tablist"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+[role="tablist"]::-webkit-scrollbar {
+    display: none;
+}
+
+/* Fix VIS-03: Prevent uppercase text-transform from leaking onto placeholder text */
+input::placeholder,
+textarea::placeholder {
+    text-transform: none !important;
+}

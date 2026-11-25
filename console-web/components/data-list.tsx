@@ -509,7 +509,7 @@ export function DataList<T extends { id: string }>({
 
       <div className="ui-surface ui-rise min-w-0 overflow-hidden">
         {tabs && presets.length > 1 && (
-          <div className="flex gap-1 overflow-x-auto border-b px-3 pt-2" role="tablist" aria-label={presetLabel}>
+          <div className="flex gap-1 overflow-x-auto overflow-y-hidden border-b px-3 pt-2 [scrollbar-width:none]" role="tablist" aria-label={presetLabel}>
             {presets.map((p) => {
               const n = p.countKey && countData ? countData[p.countKey] ?? 0 : undefined
               const on = p.key === preset
@@ -524,7 +524,7 @@ export function DataList<T extends { id: string }>({
           </div>
         )}
         <div className="flex flex-wrap items-center gap-2 p-4">
-          {!noSearch && <SearchInput value={search} onChange={setSearch} placeholder={searchPlaceholder} className="w-full sm:w-80" />}
+          {!noSearch && <SearchInput value={search} onChange={setSearch} placeholder={searchPlaceholder} className="w-full sm:w-96 lg:w-[28rem]" />}
           {summary?.(state.raw)}
           <div className="ml-auto flex flex-wrap items-center gap-2">
             <div className="hidden rounded-xl border p-0.5 md:flex" role="radiogroup" aria-label="Show as">
@@ -670,12 +670,15 @@ export function DataList<T extends { id: string }>({
                     {selectable && <Checkbox checked={selected.has(r.id)} onCheckedChange={(on) => toggleRow(r, !!on)} aria-label="Select row" className="mt-1" />}
                     <div role="button" tabIndex={0} className="grid min-w-0 flex-1 cursor-pointer grid-cols-1 gap-1 text-left" onClick={(e) => open(r, e)} onKeyDown={(e) => { if (e.key === "Enter" && e.target === e.currentTarget) open(r, e) }}>
                       <span className="font-medium">{visibleColumns[0]?.cell(r)}</span>
-                      {visibleColumns.slice(1).map((c) => (
-                        <span key={c.key} className="flex justify-between gap-3 text-sm">
-                          <span className="shrink-0 text-muted-foreground">{c.header}</span>
-                          <span className="min-w-0 truncate text-right">{c.cell(r)}</span>
-                        </span>
-                      ))}
+                      {visibleColumns.slice(1).map((c) => {
+                        const isNormal = c.className?.includes("whitespace-normal")
+                        return (
+                          <span key={c.key} className={cn("text-sm", isNormal ? "flex flex-col gap-0.5" : "flex justify-between gap-3")}>
+                            <span className="shrink-0 text-muted-foreground">{c.header}</span>
+                            <span className={cn("min-w-0", isNormal ? "whitespace-normal text-foreground" : "truncate text-right")}>{c.cell(r)}</span>
+                          </span>
+                        )
+                      })}
                     </div>
                   </li>
                 ))}
