@@ -1,0 +1,270 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Pages customers open (portal, booking, requests) stay light inside .light-scope, even in dark mode */
+@custom-variant dark (&:is(.dark *):not(:where(.light-scope, .light-scope *)));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    /* Wireframe scale: inputs/buttons 8px, chips 10px, cards 12px, dialogs 14px */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-2xl: 10px;
+    --radius-3xl: 12px;
+    --radius-4xl: 14px;
+}
+
+/* .light-scope takes the light palette again under a dark page */
+:root, .light-scope {
+    color-scheme: light;
+    /* AHEAD app palette (wireframes): light grey page, white cards, blue accent */
+    --background: #F6F7F9;
+    --foreground: #16181D;
+    --card: #FFFFFF;
+    --card-foreground: #16181D;
+    --popover: #FFFFFF;
+    --popover-foreground: #16181D;
+    --primary: #2450D8;
+    --primary-foreground: #FFFFFF;
+    --secondary: #EEF1F5;
+    --secondary-foreground: #16181D;
+    --muted: #EEF1F5;
+    --muted-foreground: #5B6270;
+    --accent: #EEF2FD;
+    --accent-foreground: #1D3FA8;
+    --destructive: #B42318;
+    --border: #D9DDE3;
+    --input: #C7CCD4;
+    --ring: #2450D8;
+    /* Console brand mark (blueprint: navy) */
+    --chart-1: #2450D8;
+    --chart-2: #0F766E;
+    --chart-3: #C2410C;
+    --chart-4: #86198F;
+    --chart-5: #5B6270;
+    --radius: 0.5rem;
+    --sidebar: #FFFFFF;
+    --sidebar-foreground: #16181D;
+    --sidebar-primary: #2450D8;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #EEF2FD;
+    --sidebar-accent-foreground: #1D3FA8;
+    --sidebar-border: #D9DDE3;
+    --sidebar-ring: #2450D8;
+    --shadow-card: 0 1px 2px rgb(22 24 29 / 0.05), 0 8px 24px rgb(22 24 29 / 0.05);
+    --shadow-card-hover: 0 2px 4px rgb(22 24 29 / 0.07), 0 14px 30px rgb(22 24 29 / 0.09);
+}
+
+.dark {
+    --background: #0F1115;
+    --foreground: #E8EAEE;
+    --card: #171A20;
+    --card-foreground: #E8EAEE;
+    --popover: #1C2027;
+    --popover-foreground: #E8EAEE;
+    --primary: #5B82F0;
+    --primary-foreground: #FFFFFF;
+    --secondary: #232731;
+    --secondary-foreground: #E8EAEE;
+    --muted: #232731;
+    --muted-foreground: #9AA1AD;
+    --accent: #1E2A4A;
+    --accent-foreground: #C9D5F7;
+    --destructive: #F0705F;
+    --border: #2A2F38;
+    --input: #3A404B;
+    --ring: #5B82F0;
+    --chart-1: #5B82F0;
+    --chart-2: #2DB3A6;
+    --chart-3: #F08A4B;
+    --chart-4: #C26CD1;
+    --chart-5: #9AA1AD;
+    --sidebar: #13161B;
+    --sidebar-foreground: #E8EAEE;
+    --sidebar-primary: #5B82F0;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #1E2A4A;
+    --sidebar-accent-foreground: #C9D5F7;
+    --sidebar-border: #2A2F38;
+    --sidebar-ring: #5B82F0;
+    --shadow-card: 0 0 0 1px var(--border);
+    --shadow-card-hover: 0 0 0 1px var(--input), 0 10px 24px rgb(0 0 0 / 0.35);
+}
+
+/* Console v3: the partner portal (/partner) is a separate place with its own violet look */
+[data-portal="partner"] {
+    --primary: #6A3FC7;
+    --primary-foreground: #FFFFFF;
+    --accent: #F1ECFC;
+    --accent-foreground: #4B2A9A;
+    --ring: #6A3FC7;
+}
+.dark [data-portal="partner"] {
+    --primary: #9F80F5;
+    --primary-foreground: #160F2E;
+    --accent: #2A2142;
+    --accent-foreground: #DCD0FF;
+    --ring: #9F80F5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+/* ---------- Public website (homepage). Light-only palette, independent of the app theme ---------- */
+@theme inline {
+    --font-display: var(--font-inter-tight);
+    --color-mk-bg: #fbfcfe;
+    --color-mk-ink: #04192b;
+    --color-mk-muted: #4a6378;
+    --color-mk-soft: #8197aa;
+    --color-mk-line: #e2e9f1;
+    --color-mk-tint: #eef4fd;
+    --color-mk-blue: #2563eb;
+    --color-mk-deep: #1d2bd8;
+}
+
+@layer components {
+  /* One surface for every card, panel and menu in the app */
+  .ui-surface { border-radius: 20px; background: var(--card); box-shadow: var(--shadow-card); }
+  .ui-lift { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+  .ui-lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+  .ui-rise { animation: ui-rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  @keyframes ui-rise {
+    from { opacity: 0; transform: translateY(12px) scale(0.99); }
+    to { opacity: 1; transform: none; }
+  }
+  /* The first number on a dashboard tab is the headline */
+  .kpi-row > :first-child { background: var(--primary); color: var(--primary-foreground); }
+  .kpi-row > :first-child * { color: inherit !important; }
+  @media (prefers-reduced-motion: reduce) {
+    .ui-rise { animation: none; }
+    .ui-lift { transition: none; }
+    .ui-lift:hover { transform: none; }
+  }
+  /* Settings deep link (/app/settings/payments#upi-id): the setting flashes once */
+  .setting-highlight {
+    border-radius: 12px;
+    animation: setting-flash 2.4s ease-out;
+  }
+  @keyframes setting-flash {
+    0%, 60% { box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 45%, transparent); }
+    100% { box-shadow: 0 0 0 3px transparent; }
+  }
+  .mk {
+    color-scheme: light;
+    background: var(--color-mk-bg);
+    color: var(--color-mk-ink);
+  }
+  .mk-display {
+    font-family: var(--font-inter-tight), var(--font-sans), sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+  .mk-cta {
+    background-image: linear-gradient(180deg, #3b82f6 0%, #1d2bd8 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.25),
+      0 1px 3px -1px rgb(29 43 216 / 0.3),
+      0 4px 12px -3px rgb(29 43 216 / 0.25),
+      0 14px 40px -6px rgb(37 99 235 / 0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  }
+  .mk-cta:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .mk-card {
+    background: #fff;
+    border: 1px solid var(--color-mk-line);
+    box-shadow: 0 1px 2px rgb(4 25 43 / 0.04), 0 12px 32px -16px rgb(4 25 43 / 0.12);
+  }
+  .mk-glow {
+    position: relative;
+    isolation: isolate;
+  }
+  .mk-glow::before {
+    content: "";
+    position: absolute;
+    inset: -28px -40px;
+    z-index: -1;
+    border-radius: 999px;
+    background: radial-gradient(closest-side, rgb(56 189 248 / 0.35), transparent);
+    filter: blur(8px);
+  }
+  .mk-grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(4 25 43 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(4 25 43 / 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
+  }
+}
+
+/* Content is visible without JS or scroll-timeline support; capable browsers fade sections in */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .mk-reveal {
+      animation: mk-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+@keyframes mk-rise {
+  from { opacity: 0; transform: translateY(28px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Workspace density (Settings › Branding): compact shrinks rem-based spacing and type a little */
+html[data-density="compact"] {
+    font-size: 15px;
+}
+
+/* Field that passed its checks (Field success line) */
+[data-valid="true"] {
+    border-color: #1F7A4D;
+}
