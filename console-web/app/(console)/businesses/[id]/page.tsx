@@ -107,7 +107,7 @@ export default function BusinessPage() {
         { label: "Plan", value: s?.plan.name ?? "—", hint: s ? `${s.cycle}${s.extraUsers ? ` · +${s.extraUsers} users` : ""}` : undefined, icon: Tags, color: "blue" },
         { label: s?.status === "trialing" ? "Trial ends" : s?.status === "past_due" ? "Moves to Free" : closed ? "Data deleted on" : "Paid until", value: s?.status === "trialing" && s.trialEndsAt ? formatDate(s.trialEndsAt) : s?.status === "past_due" && s.graceEndsAt ? formatDate(s.graceEndsAt) : closed && s?.purgeAt ? formatDate(s.purgeAt) : s?.periodEnd ? formatDate(s.periodEnd) : "—", icon: CalendarClock, color: s?.status === "past_due" ? "rose" : "emerald" },
         { label: "Users", value: f ? `${f.team?.active ?? "…"} of ${(s?.plan.limits.users ?? 0) + (s?.extraUsers ?? 0)}` : "—", hint: f ? `${f.team?.invited ?? 0} invited · ${f.team?.branches ?? 0} branch${(f.team?.branches ?? 0) === 1 ? "" : "es"}` : "The ERP hasn’t answered yet", icon: Users, color: "violet" },
-        { label: "Last active", value: f?.lastActiveAt ? ago(f.lastActiveAt) : "Never", hint: f ? `${formatNumber(f.usage.invoicesThisMonth)} invoices this month` : undefined, icon: Wallet, color: "amber" },
+        { label: "Last active", value: f?.lastActiveAt ? ago(f.lastActiveAt) : "Never", hint: f?.usage ? `${formatNumber(f.usage.invoicesThisMonth)} invoices this month` : undefined, icon: Wallet, color: "amber" },
       ]} />
 
       <Steps label="Onboarding" steps={steps.map((x, i) => ({ key: x.key, label: x.label, state: x.done ? "done" : i === at ? "current" : "todo" }))} />
@@ -143,9 +143,9 @@ export default function BusinessPage() {
                   ["Active users", f.team.active],
                   ["Invited", f.team.invited],
                   ["Branches", f.team.branches],
-                  ["Invoices this month", formatNumber(f.usage.invoicesThisMonth)],
-                  ["Customers", formatNumber(f.usage.customers)],
-                  ["Storage used", `${(f.usage.storageBytes / 1048576).toFixed(1)} MB of ${formatNumber(Math.round((s?.plan.limits.storageMb ?? 0) / 1024))} GB`],
+                  ["Invoices this month", formatNumber(f.usage?.invoicesThisMonth ?? 0)],
+                  ["Customers", formatNumber(f.usage?.customers ?? 0)],
+                  ["Storage used", `${((f.usage?.storageBytes ?? 0) / 1048576).toFixed(1)} MB of ${formatNumber(Math.round((s?.plan.limits.storageMb ?? 0) / 1024))} GB`],
                   ["Setup", f.setupDone ? "Finished" : "Not finished"],
                   ["Last active", f.lastActiveAt ? formatDateTime(f.lastActiveAt) : "Never"],
                   ["Licence", d.licences[0] ? `#${d.licences[0].seq} · ${d.licences[0].deliveredAt ? "delivered" : "waiting"}` : "—"],

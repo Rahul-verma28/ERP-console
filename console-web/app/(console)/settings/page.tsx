@@ -175,8 +175,8 @@ export default function SettingsPage() {
               <Field label="Address" className="sm:col-span-2" error={errors["seller.address"]}><Textarea value={f.seller.address} onChange={setSeller("address")} maxLength={300} placeholder="e.g. 4th floor, Tower B, Sector 62, Noida 201301" /></Field>
             </div>
             <div className="mt-2">
-              <SettingRow title="SAC" description="998314 for IT services" error={errors["seller.sac"]}><Input value={f.seller.sac} aria-label="SAC" onChange={(e) => setF((x) => x && { ...x, seller: { ...x.seller, sac: e.target.value.replace(/\D/g, "").slice(0, 6) } })} className="w-36 font-mono" /></SettingRow>
-              <SettingRow title="GST rate" description="18% for software services" error={errors["seller.gstRateBp"]}><NumberStepper value={f.seller.gstRate} onChange={(v) => setF((x) => x && { ...x, seller: { ...x.seller, gstRate: v } })} min={0} max={28} suffix="%" aria-label="GST rate" className="w-36" /></SettingRow>
+              <SettingRow title="SAC" description="998314 for IT services" error={errors["seller.sac"]}><Input value={f.seller.sac} aria-label="SAC" aria-invalid={!!errors["seller.sac"]} onChange={(e) => setF((x) => x && { ...x, seller: { ...x.seller, sac: e.target.value.replace(/\D/g, "").slice(0, 6) } })} className="w-36 font-mono" /></SettingRow>
+              <SettingRow title="GST rate" description="18% for software services" error={errors["seller.gstRateBp"]}><NumberStepper value={f.seller.gstRate} aria-invalid={!!errors["seller.gstRateBp"]} onChange={(v) => setF((x) => x && { ...x, seller: { ...x.seller, gstRate: v } })} min={0} max={28} suffix="%" aria-label="GST rate" className="w-36" /></SettingRow>
             </div>
           </SettingsCard>
 
